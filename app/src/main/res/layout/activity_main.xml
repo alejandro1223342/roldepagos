@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.368" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/estadoCivilSpinner"
         android:layout_width="216dp"
         android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +178,7 @@
         app:layout_constraintVertical_bias="0.798" />
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/descuentoAtrasosEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -192,7 +192,7 @@
         app:layout_constraintVertical_bias="0.599" />
 
     <EditText
-        android:id="@+id/editTextText8"
+        android:id="@+id/subsidioEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -206,7 +206,7 @@
         app:layout_constraintVertical_bias="0.521" />
 
     <EditText
-        android:id="@+id/editTextText7"
+        android:id="@+id/horasExtrasEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -220,7 +220,7 @@
         app:layout_constraintVertical_bias="0.696" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/numHijosEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -234,7 +234,7 @@
         app:layout_constraintVertical_bias="0.368" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/nombreEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -248,7 +248,7 @@
         app:layout_constraintVertical_bias="0.122" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/cargoSpinner"
         android:layout_width="216dp"
         android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -259,7 +259,7 @@
         app:layout_constraintVertical_bias="0.206" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/areaSpinner"
         android:layout_width="216dp"
         android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -270,7 +270,7 @@
         app:layout_constraintVertical_bias="0.287" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/guardarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrar"
