@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.roldepagos.bdd.DBHelper;
 
@@ -17,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText nombreEditText;
     private EditText numHijosEditText;
-    private EditText subsidioEditText;
-    private EditText descuentoAtrasosEditText;
-    private EditText horasExtrasEditText;
     private Button guardarButton;
 
     private Spinner cargoSpinner;
@@ -47,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
         estadoCivilSpinner = findViewById(R.id.estadoCivilSpinner);
         nombreEditText = findViewById(R.id.nombreEditText);
         numHijosEditText = findViewById(R.id.numHijosEditText);
-        subsidioEditText = findViewById(R.id.subsidioEditText);
-        descuentoAtrasosEditText = findViewById(R.id.descuentoAtrasosEditText);
-        horasExtrasEditText = findViewById(R.id.horasExtrasEditText);
         guardarButton = findViewById(R.id.guardarButton);
 
         cargoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cargos);
@@ -81,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
         String nombre = nombreEditText.getText().toString();
         int numHijos = Integer.parseInt(numHijosEditText.getText().toString());
         int subsidio = calcularSubsidio(numHijos);
-        double descuentoAtrasos = Double.parseDouble(descuentoAtrasosEditText.getText().toString());
-        int horasExtras = Integer.parseInt(horasExtrasEditText.getText().toString());
-        double sueldoRecibir = calcularSueldoRecibir(cargo, descuentoAtrasos, horasExtras);
+        double sueldoRecibir = calcularSueldoRecibir(cargo, subsidio);
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -94,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
         values.put("num_hijos", numHijos);
         values.put("estado_civil", estadoCivil);
         values.put("subsidio", subsidio);
-        values.put("descuentro_atrasos", descuentoAtrasos);
-        values.put("horas_extras", horasExtras);
         values.put("sueldo_recibir", sueldoRecibir);
 
         db.insert("funcionarios", null, values);
@@ -103,24 +94,23 @@ public class MainActivity extends AppCompatActivity {
         // Limpia los campos de entrada después de guardar los datos
         nombreEditText.setText("");
         numHijosEditText.setText("");
-        subsidioEditText.setText("");
-        descuentoAtrasosEditText.setText("");
-        horasExtrasEditText.setText("");
+
+        // Muestra el sueldo a pagar en un TextView después de guardar los datos
+        TextView sueldoRecibirTextView = findViewById(R.id.sueldoRecibirTextView);
+        sueldoRecibirTextView.setText(String.valueOf(sueldoRecibir));
 
         db.close();
     }
 
     private int calcularSubsidio(int numHijos) {
-
         return numHijos * 100;
     }
 
-    private double calcularSueldoRecibir(String cargo, double descuentoAtrasos, int horasExtras) {
-
-        if (cargo.equalsIgnoreCase("docente")) {
-            return 1000 - (1000 * descuentoAtrasos / 100) + (horasExtras * 12);
-        } else if (cargo.equalsIgnoreCase("administrativo")) {
-            return 880 - (880 * descuentoAtrasos / 100) + (horasExtras * 12);
+    private double calcularSueldoRecibir(String cargo, int subsidio) {
+        if (cargo.equalsIgnoreCase("Docente")) {
+            return 1000 + subsidio;
+        } else if (cargo.equalsIgnoreCase("Administrativo")) {
+            return 880 + subsidio;
         } else {
             return 0;
         }
