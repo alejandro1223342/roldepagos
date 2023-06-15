@@ -3,6 +3,7 @@ package com.example.roldepagos;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText nombreEditText;
     private EditText numHijosEditText;
     private Button guardarButton;
+    private Button verFuncionariosButton;
+    private Button actualizarFuncionarioButton;
+    private Button eliminarFuncionarioButton;
 
     private Spinner cargoSpinner;
     private Spinner areaSpinner;
@@ -46,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         nombreEditText = findViewById(R.id.nombreEditText);
         numHijosEditText = findViewById(R.id.numHijosEditText);
         guardarButton = findViewById(R.id.guardarButton);
+        verFuncionariosButton = findViewById(R.id.verFuncionariosButton);
+        actualizarFuncionarioButton = findViewById(R.id.actualizarFuncionarioButton);
+        eliminarFuncionarioButton = findViewById(R.id.eliminarFuncionarioButton);
 
         cargoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cargos);
         cargoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -65,6 +72,27 @@ public class MainActivity extends AppCompatActivity {
                 guardarFuncionario();
             }
         });
+        verFuncionariosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirVerFuncionariosActivity();
+            }
+        });
+
+        actualizarFuncionarioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirActualizarFuncionarioActivity();
+            }
+        });
+
+        eliminarFuncionarioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirEliminarFuncionarioActivity();
+            }
+        });
+
     }
 
     private void guardarFuncionario() {
@@ -106,6 +134,20 @@ public class MainActivity extends AppCompatActivity {
         return numHijos * 100;
     }
 
+    private void abrirVerFuncionariosActivity() {
+        Intent intent = new Intent(MainActivity.this, VerFuncionariosActivity.class);
+        startActivity(intent);
+    }
+
+    private void abrirActualizarFuncionarioActivity() {
+        Intent intent = new Intent(MainActivity.this, ActualizarFuncionarioActivity.class);
+        startActivity(intent);
+    }
+
+    private void abrirEliminarFuncionarioActivity() {
+        Intent intent = new Intent(MainActivity.this, EliminarFuncionarioActivity.class);
+        startActivity(intent);
+    }
     private double calcularSueldoRecibir(String cargo, int subsidio) {
         if (cargo.equalsIgnoreCase("Docente")) {
             return 1000 + subsidio;
